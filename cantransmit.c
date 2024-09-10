@@ -64,9 +64,9 @@ int main(int argc, char **argv)
 	Envoyer une trame CAN, initialiser une structure can_frame et la remplir avec des données. 
 	La structure can_frame de base est définie dans include/linux/can.h  
 	*/
-	frame.can_id = 0x0F7;  	// identifiant CAN, exemple: 247 = 0x0F7
+	frame.can_id = 0x0555;  	// identifiant CAN, exemple: 247 = 0x0F7
 	frame.can_dlc = 7;		// nombre d'octets de données
-	sprintf(frame.data, "616-TGE");  // données 
+	sprintf(frame.data, "009");  // données 
 
 	if (write(fdSocketCAN, &frame, sizeof(struct can_frame)) != sizeof(struct can_frame)) {
 		perror("Write");

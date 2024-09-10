@@ -11,7 +11,7 @@
 #include <sys/socket.h>
 
 #include <linux/can.h>
-#include <linux/can/raw.h>
+#include <linux/can/raw.h>                                    
 
 int main(int argc, char **argv)
 {
@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 
 	if(argc == 2)
 		strcpy(ifr.ifr_name, argv[1]);
-	else strcpy(ifr.ifr_name, "vcan0" );
+	else strcpy(ifr.ifr_name, "can0" );
 
 	ioctl(fdSocketCAN, SIOCGIFINDEX, &ifr);
 	
@@ -46,10 +46,10 @@ int main(int argc, char **argv)
 	/// A filter matches, when <received_can_id> & mask == can_id & mask
 	struct can_filter rfilter[1]; // filtres pour 2 ID
 
-	rfilter[0].can_id   = 0x550; 
-	rfilter[0].can_mask = 0xFF0;
-	rfilter[1].can_id   = 0x480;
-	rfilter[1].can_mask = 0xFF0;
+	rfilter[0].can_id   = 0x115;
+	rfilter[0].can_mask = 0xFFF;
+	rfilter[1].can_id   = 0x565;
+	rfilter[1].can_mask = 0xFFF;
 
 	setsockopt(fdSocketCAN, SOL_CAN_RAW, CAN_RAW_FILTER, &rfilter, sizeof(rfilter));
 
